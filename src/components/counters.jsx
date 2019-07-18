@@ -2,28 +2,23 @@ import React, { Component } from 'react';
 import Counter from './counter';
 
 class Counters extends Component {
-    state = {
-        counters: [
-            {id: 1, value: 1},
-            {id: 2, value: 2},
-            {id: 3, value: 3},
-            {id: 4, value: 4}
-        ]
-    };
-
-    handleDelete = counterId => { 
-        console.log('event handler called', counterId);
-    }
-
     render() { 
         return ( 
             <div>
-                {this.state.counters.map(counter =>
-                     <Counter key={counter.id} onDelete={this.handleDelete} value={counter.value}/>)}
+                <button
+                    className="btn btn-primary"
+                    onClick={this.props.onReset}>Reset</button>
+                {this.props.counters.map(counter =>
+                     <Counter 
+                        key={counter.id} 
+                        onDelete={this.props.onDelete}
+                        onIncrement={this.props.onIncrement}
+                        counter={counter}
+                        />
+                    )}
             </div>
         );
     }
 }
  
 export default Counters;
-
